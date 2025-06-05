@@ -42,7 +42,33 @@ PharmaChain’s modular architecture separates presentation, business logic, mid
 - **AI Module:** Machine learning models for real-time anomaly detection and certificate validation.
 - **Authentication:** Role-based access control via Ethereum addresses, managed through MetaMask.
 
+## Storage in Blockchain and IPFS
 
+![architect](https://github.com/user-attachments/assets/9dac4126-aa66-4fc8-b15a-55a07111409a)
+
+PharmaChain leverages **Ethereum** and **IPFS** to ensure secure, scalable, and decentralized data storage.
+
+### Ethereum Blockchain
+
+- Stores critical supply chain events (e.g., batch creation, ownership transfers, environmental updates) as immutable records  
+- Uses **Solidity** smart contracts to automate processes like batch registration, IoT sensor association, and sale recording  
+- Stores metadata such as transaction hashes and **IPFS Content Identifiers (CIDs)** to ensure traceability and tamper-proof records  
+- Each pharmaceutical product or box is linked to a unique blockchain address, creating a **digital twin** for lifecycle tracking  
+
+### IPFS (InterPlanetary File System)
+
+- Handles large data payloads such as environmental sensor data (temperature, humidity, location) and certificates, stored **off-chain** to reduce blockchain costs  
+- Data is pinned to IPFS nodes, generating unique **CIDs** referenced in the Ethereum blockchain for verification  
+- Ensures decentralized, fault-tolerant storage, accessible via an **IPFS gateway** integrated into the middleware  
+- **Node-RED** flows upload IoT data to IPFS every minute, with CIDs anchored to the blockchain for data integrity  
+
+### Integration
+
+- Smart contracts link blockchain records to IPFS CIDs, enabling efficient retrieval of detailed data (e.g., environmental logs, certificate PDFs)  
+- The **middleware** synchronizes blockchain and IPFS data, ensuring real-time updates and consistency across the system  
+- **Final Users** can access IPFS-stored data (e.g., product history, environmental conditions) via the mobile app by querying the blockchain for CIDs
+
+  
 ## Prerequisites
 Ensure the following are installed:
 - **Node.js** (v14.x or higher)
@@ -155,8 +181,7 @@ pharmachain/
 │   ├── assets/               # Images and static resources
 │   ├── package.json          # Mobile app dependencies
 │   └── tsconfig.json         # TypeScript configuration
-├── node-red-flows/           # Node-RED flow configurations
-└── README.md                 # This file
+
 ```
 
 
