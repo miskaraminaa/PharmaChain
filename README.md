@@ -11,7 +11,7 @@ The system integrates:
 - **Blockchain (Ethereum):** Immutable data recording and smart contract automation.
 - **IoT (Node-RED):** Real-time environmental monitoring (temperature, humidity, etc.).
 - **AI:** Anomaly detection and certificate validation with 96% accuracy.
-- **Web and Mobile Interfaces:** For manufacturers, distributors, pharmacies, and end-users.
+- **Web and Mobile Interfaces:** For manufacturers, distributors, pharmacies, and final users.
 
 PharmaChain creates digital twins for each pharmaceutical product, enabling lifecycle tracking with cryptographic proof of authenticity, compliant with regulations like Good Manufacturing Practice (GMP) and Good Distribution Practice (GDP).
 
@@ -21,7 +21,7 @@ PharmaChain creates digital twins for each pharmaceutical product, enabling life
 - **Fraud Detection:** AI validates certificates and detects anomalies.
 - **User Interfaces:**
   - Web platform for manufacturers, distributors, and pharmacies.
-  - Mobile app for end-users to verify product authenticity and history.
+  - Mobile app for final users to verify product authenticity and history.
 - **Decentralized Storage:** IPFS for secure, distributed data storage.
 - **Scalability & Security:** Modular architecture ensures performance and data integrity.
 
@@ -110,29 +110,28 @@ Place both `pharmachain-web` and `pharmachain-mobile` directories in the same pa
 3. Configure IoT data flow:
    - Create a flow to simulate IoT sensor data (temperature, humidity, location) every 1 minute.
    - Connect the flow to the Ethereum blockchain and IPFS for data storage.
-   - Associate sensor data with box-specific blockchain addresses.
-   - Refer to *Figure 3.3* in the project report for the Node-RED data flow configuration.
+<img width="917" alt="IoT flow" src="https://github.com/user-attachments/assets/f8aef8b2-a9a4-4a23-9691-2c0bc6531fa9" />
 
 ## Usage
 PharmaChain supports four main actors:
 
 ### Manufacturer
-- **Create Batches**: Enter batch details, raw materials, and certificates via the web interface (*Figure 5.6*). Invalid certificates trigger an alert (*Figure 5.7*).
+- **Create Batches**: Enter batch details, raw materials, and certificates via the web interface. Invalid certificates trigger an alert.
 - **Enter Environmental Data**: Manually input conditions like temperature and humidity.
-- **Confirm Transactions**: Use MetaMask to validate batch creation and unit assignments (*Figures 5.9, 5.10, 5.11*).
+- **Confirm Transactions**: Use MetaMask to validate batch creation and unit assignments.
 
 ### Distributor
-- **Link IoT Sensors**: Associate boxes with IoT devices via the web interface (*Figure 5.12*).
+- **Link IoT Sensors**: Associate boxes with IoT devices via the web interface.
 - **Monitor Environmental Data**: Node-RED generates data every minute, stored on IPFS and anchored to the blockchain.
 
 ### Pharmacy
-- **Link IoT Sensors**: Associate boxes with IoT devices (*Figure 5.13*).
+- **Link IoT Sensors**: Associate boxes with IoT devices.
 - **Record Sales**: Mark medications as sold and update blockchain records.
 - **Monitor Conditions**: Access real-time environmental data for received batches.
 
-### End-User
-- **Verify Authenticity**: Scan a product QR code using the mobile app (*Figure 5.15*).
-- **View Details**: Access product history, including manufacturer, batch number, production date, and environmental conditions (*Figure 5.16*).
+### Final User
+- **Verify Authenticity:** Enter the product reference using the mobile app
+- **View Details**: Access product history, including manufacturer, batch number, production date, and environmental conditions.
 
 ## Project Structure
 ```
@@ -161,12 +160,6 @@ pharmachain/
 └── README.md                 # This file
 ```
 
-## Contributing
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/your-feature`).
-3. Commit changes (`git commit -m 'Add your feature'`).
-4. Push to the branch (`git push origin feature/your-feature`).
-5. Open a pull request.
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
@@ -174,10 +167,8 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Acknowledgments
 - **Prof. Mohamed Hanine**: For his mentorship and guidance.
 - **Prof. Nouhaila Elakrami**: For her valuable insights.
-- **ENSAJ Faculty and Staff**: For their support throughout the project.
 
 ## Contact
-For questions or feedback, contact the project team:
-- **Team Members**: Zineb Elhalla, Amina Miskar, Ayoub Harati, Aya El Abidi
-- **Institution**: École Nationale des Sciences Appliquées d'El Jadida (ENSAJ)
+- **Team Members**: Amina Miskar, Zineb Elhalla, Ayoub Harati, Aya El Abidi
+- **Institution**: National School of Applied Sciences El Jadida (ENSAJ)
 - **Supervisor**: Prof. Mohamed Hanine
