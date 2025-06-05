@@ -42,7 +42,6 @@ PharmaChain’s modular architecture separates presentation, business logic, mid
 - **AI Module:** Machine learning models for real-time anomaly detection and certificate validation.
 - **Authentication:** Role-based access control via Ethereum addresses, managed through MetaMask.
 
-For a detailed architecture, refer to *Figure 3.1* in the project report.
 
 ## Prerequisites
 Ensure the following are installed:
@@ -53,7 +52,7 @@ Ensure the following are installed:
 - **Node-RED**: For IoT data simulation
 - **Ganache**: For local Ethereum blockchain testing
 - **Expo CLI**: For mobile app development
-- A running **Ethereum blockchain** (local or testnet) and **IPFS node**
+- A running **Ethereum blockchain** and **IPFS node**
 
 ## Installation and Setup
 Place both `pharmachain-web` and `pharmachain-mobile` directories in the same parent folder.
