@@ -1,96 +1,183 @@
 # PharmaChain
 
 ## Overview
-
-**PharmaChain** is a full-stack platform designed to enhance pharmaceutical supply chain traceability using **Blockchain**, **IoT**, and **Artificial Intelligence**. It ensures secure, transparent tracking of pharmaceutical products from manufacturing to distribution to pharmacies, addressing issues such as:
+**PharmaChain** is a full-stack platform that enhances pharmaceutical supply chain traceability using **Blockchain**, **IoT**, and **Artificial Intelligence**. It ensures secure, transparent tracking of pharmaceutical products from manufacturing to distribution to pharmacies, addressing critical issues such as:
 
 - Counterfeiting
 - Environmental non-compliance
 - Lack of transparency
 
 The system integrates:
+- **Blockchain (Ethereum):** Immutable data recording and smart contract automation.
+- **IoT (Node-RED):** Real-time environmental monitoring (temperature, humidity, etc.).
+- **AI:** Anomaly detection and certificate validation with 96% accuracy.
+- **Web and Mobile Interfaces:** For manufacturers, distributors, pharmacies, and end-users.
 
-- **Blockchain (Ethereum):** For immutable data recording and smart contract automation.
-- **IoT (Node-RED):** For real-time environmental monitoring (temperature, humidity, etc.).
-- **AI:** For anomaly detection and fraud prevention in certificates and documents.
-- **Web and Mobile Interfaces:** For interaction among manufacturers, distributors, pharmacies, and end-users.
-
----
+PharmaChain creates digital twins for each pharmaceutical product, enabling lifecycle tracking with cryptographic proof of authenticity, compliant with regulations like Good Manufacturing Practice (GMP) and Good Distribution Practice (GDP).
 
 ## Features
-
-- **Traceability:** Track drugs from manufacturing to dispensing via blockchain-based immutability.
-- **Environmental Monitoring:** IoT sensors collect and report real-time temperature and humidity.
-- **Fraud Detection:** AI validates certificates with 96% accuracy.
+- **Traceability:** Tracks drugs from manufacturing to dispensing with blockchain-based immutability.
+- **Environmental Monitoring:** IoT sensors collect real-time temperature, humidity, and location data.
+- **Fraud Detection:** AI validates certificates and detects anomalies.
 - **User Interfaces:**
   - Web platform for manufacturers, distributors, and pharmacies.
   - Mobile app for end-users to verify product authenticity and history.
-- **Decentralized Storage:** IPFS is used for secure, distributed data storage.
+- **Decentralized Storage:** IPFS for secure, distributed data storage.
 - **Scalability & Security:** Modular architecture ensures performance and data integrity.
 
----
-
 ## Architecture
+![Architecture Diagram](https://github.com/user-attachments/assets/a2fb4e47-ae31-4c26-b673-3ce215c94efb)
 
-![Architecture](https://github.com/user-attachments/assets/a2fb4e47-ae31-4c26-b673-3ce215c94efb)
-
-
-PharmaChain’s modular architecture separates presentation, business logic, middleware, and storage for easy maintenance and scalability.
+PharmaChain’s modular architecture separates presentation, business logic, middleware, and storage layers for maintainability and scalability. Key components include:
 
 ### Frontend
-
-- **Web Platform:** Built using React.js, Vite, Material Tailwind, and integrates MetaMask via Web3.js.
-- **Mobile App:** Developed with React Native using Zustand and Expo.
+- **Web Platform:** Built with **React.js**, **Vite**, and **Material Tailwind**. Integrates **MetaMask** via **Web3.js** for secure blockchain transactions.
+- **Mobile App:** Developed using **React Native**, **Zustand** for state management, and **Expo** for cross-platform compatibility.
 
 ### Backend
+- **Blockchain:** Ethereum with **Solidity smart contracts** for recording supply chain events.
+- **IPFS:** Decentralized storage for documents and sensor data using Content Identifiers (CIDs).
+- **IoT Integration:** **Node-RED** simulates and manages IoT sensor data (temperature, humidity, location).
+- **Middleware:** Includes event listeners for real-time blockchain updates, synchronization services, and an IPFS gateway.
+- **AI Module:** Machine learning models for real-time anomaly detection and certificate validation.
+- **Authentication:** Role-based access control via Ethereum addresses, managed through MetaMask.
 
-- **Blockchain:** Ethereum blockchain using Solidity smart contracts.
-- **IPFS:** Decentralized storage for documents and sensor data using CIDs.
-- **IoT Integration:** Node-RED manages and simulates IoT data (temperature, humidity, location).
-- **Middleware:** Real-time event listeners, synchronization services, and IPFS gateway.
-- **AI Module:** Real-time anomaly detection and certificate validation.
-- **Authentication:** Role-based access via Ethereum addresses (MetaMask).
-
-
----
+For a detailed architecture, refer to *Figure 3.1* in the project report.
 
 ## Prerequisites
-
 Ensure the following are installed:
-
-- Node.js (v14.x or higher)
-- npm (v6.x or higher)
-- Truffle Suite
-- MetaMask browser extension
-- Node-RED
-- Ganache (for local Ethereum testing)
-- Expo CLI
-- A running Ethereum blockchain and IPFS node
-
----
+- **Node.js** (v14.x or higher)
+- **npm** (v6.x or higher)
+- **Truffle Suite**: For smart contract deployment
+- **MetaMask**: Browser extension for Ethereum wallet integration
+- **Node-RED**: For IoT data simulation
+- **Ganache**: For local Ethereum blockchain testing
+- **Expo CLI**: For mobile app development
+- A running **Ethereum blockchain** (local or testnet) and **IPFS node**
 
 ## Installation and Setup
-
-Place both `pharmachain-web` and `pharmachain-mobile` in the same parent directory.
+Place both `pharmachain-web` and `pharmachain-mobile` directories in the same parent folder.
 
 ### Web Platform Setup
+1. Navigate to the web project directory:
+   ```bash
+   cd pharmachain-web
+   ```
+2. Install dependencies:
+   ```bash
+   npm install lucide-react @material-tailwind/react web3
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+4. Deploy smart contracts:
+   Ensure Truffle is configured with your Ethereum network (e.g., Ganache or testnet).
+   ```bash
+   truffle migrate
+   ```
+5. Export smart contract ABI:
+   ```bash
+   node scripts/exportABI.js
+   ```
+   This script copies the ABI to the user project.
+6. Access the web interface:
+   Open `http://localhost:5173` (or the port specified by Vite) in your browser.
 
-```bash
-cd pharmachain-web
+### Mobile App Setup
+1. Navigate to the mobile project directory:
+   ```bash
+   cd pharmachain-mobile
+   ```
+2. Install dependencies:
+   ```bash
+   npm install @expo/vector-icons @react-native-async-storage/async-storage @react-navigation/native expo-blur expo-constants expo-font expo-haptics expo-image expo-image-picker expo-linear-gradient expo-linking expo-location expo-splash-screen expo-status-bar expo-symbols expo-system-ui expo-web-browser lucide-react-native nativewind zustand --legacy-peer-deps
+   ```
+3. Start the mobile app:
+   ```bash
+   npx expo start
+   ```
+4. Access the mobile app:
+   Use the Expo Go app on your iOS/Android device or an emulator to scan the QR code generated by Expo.
 
-# Install dependencies
-npm install lucide-react
-npm install @material-tailwind/react
-npm install web3
+### IoT Integration with Node-RED
+1. Install Node-RED:
+   Follow the official [Node-RED installation guide](https://nodered.org/docs/getting-started/).
+2. Start Node-RED:
+   ```bash
+   node-red
+   ```
+3. Configure IoT data flow:
+   - Create a flow to simulate IoT sensor data (temperature, humidity, location) every 1 minute.
+   - Connect the flow to the Ethereum blockchain and IPFS for data storage.
+   - Associate sensor data with box-specific blockchain addresses.
+   - Refer to *Figure 3.3* in the project report for the Node-RED data flow configuration.
 
-# Run development server
-npm run dev
+## Usage
+PharmaChain supports four main actors:
 
-# Deploy smart contracts
-truffle migrate
+### Manufacturer
+- **Create Batches**: Enter batch details, raw materials, and certificates via the web interface (*Figure 5.6*). Invalid certificates trigger an alert (*Figure 5.7*).
+- **Enter Environmental Data**: Manually input conditions like temperature and humidity.
+- **Confirm Transactions**: Use MetaMask to validate batch creation and unit assignments (*Figures 5.9, 5.10, 5.11*).
 
-# Export ABI
-node scripts/exportABI.js
+### Distributor
+- **Link IoT Sensors**: Associate boxes with IoT devices via the web interface (*Figure 5.12*).
+- **Monitor Environmental Data**: Node-RED generates data every minute, stored on IPFS and anchored to the blockchain.
 
-# Open in browser
-http://localhost:5173
+### Pharmacy
+- **Link IoT Sensors**: Associate boxes with IoT devices (*Figure 5.13*).
+- **Record Sales**: Mark medications as sold and update blockchain records.
+- **Monitor Conditions**: Access real-time environmental data for received batches.
+
+### End-User
+- **Verify Authenticity**: Scan a product QR code using the mobile app (*Figure 5.15*).
+- **View Details**: Access product history, including manufacturer, batch number, production date, and environmental conditions (*Figure 5.16*).
+
+## Project Structure
+```
+pharmachain/
+├── pharmachain-web/
+│   ├── build/                # Compiled contracts (ABI, bytecode)
+│   ├── contracts/            # Solidity smart contracts
+│   ├── migrations/           # Truffle deployment scripts
+│   ├── src/                  # React.js frontend code
+│   ├── scripts/              # Utility scripts
+│   │   └── exportABI.js      # Script to export smart contract ABI
+│   ├── truffle-config.js     # Blockchain network configuration
+│   ├── package.json          # Node.js dependencies
+│   └── .env                  # Environment variables
+├── pharmachain-mobile/
+│   ├── app/                  # Core React Native code
+│   ├── blockchain/           # Blockchain interaction logic
+│   ├── components/           # Reusable UI components
+│   ├── services/             # Business logic
+│   ├── store/                # State management (Zustand)
+│   ├── utils/                # Helper functions
+│   ├── assets/               # Images and static resources
+│   ├── package.json          # Mobile app dependencies
+│   └── tsconfig.json         # TypeScript configuration
+├── node-red-flows/           # Node-RED flow configurations
+└── README.md                 # This file
+```
+
+## Contributing
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/your-feature`).
+3. Commit changes (`git commit -m 'Add your feature'`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Open a pull request.
+
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+- **Prof. Mohamed Hanine**: For his mentorship and guidance.
+- **Prof. Nouhaila Elakrami**: For her valuable insights.
+- **ENSAJ Faculty and Staff**: For their support throughout the project.
+
+## Contact
+For questions or feedback, contact the project team:
+- **Team Members**: Zineb Elhalla, Amina Miskar, Ayoub Harati, Aya El Abidi
+- **Institution**: École Nationale des Sciences Appliquées d'El Jadida (ENSAJ)
+- **Supervisor**: Prof. Mohamed Hanine
